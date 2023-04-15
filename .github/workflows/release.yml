@@ -38,7 +38,7 @@ jobs:
             vinit-linux-arm
             vinit-macos-amd64
             vinit-macos-arm64
-            vinit-windows-amd64.exe
-            vinit-windows-386.exe
+            vinit-windows-x64.exe
+            vinit-windows-x86.exe
             vinit-windows-arm64.exe
             vinit-windows-arm.exe
