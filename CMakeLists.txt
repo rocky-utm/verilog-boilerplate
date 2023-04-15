@@ -9,9 +9,9 @@ if (NOT verilator_FOUND)
     message(FATAL_ERROR "Verilator was not found. Either install it, or set the VERILATOR_ROOT environment variable")
 endif()
 
-add_executable(verilator_demo_test testbench.cpp)
+add_executable(NAME_test testbench.cpp)
 
-verilate(verilator_demo_test
+verilate(NAME_test
         INCLUDE_DIRS .
-        SOURCES ledmodule.v testbench.v
+        SOURCES NAME.v testbench.v
         VERILATOR_ARGS --timing --trace)
