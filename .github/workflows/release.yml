@@ -1,8 +1,9 @@
-name: Publish init
+name: Publish vinit binary
 
 on:
   push:
-    tags: *
+    tags:
+      - '*'
 
 jobs:
   build:
