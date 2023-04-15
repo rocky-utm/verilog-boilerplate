@@ -2,7 +2,6 @@ name: Publish vinit binary
 
 on:
   push:
-    branches: ['*']
     tags: ['*']
 
 jobs:
