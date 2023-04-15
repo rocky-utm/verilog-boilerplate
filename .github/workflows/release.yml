@@ -7,6 +7,9 @@ on:
 
 jobs:
   build:
+    permissions:
+      contents: write
+      pull-requests: read
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -17,28 +20,19 @@ jobs:
           go-version: 1.20.3
       - name: Build
         run: |
-          GOOS=linux GOARCH=amd64 go build -o vinit-linux-amd64 init.go 
-          GOOS=linux GOARCH=386 go build -o vinit-linux-386 init.go 
-          GOOS=linux GOARCH=arm64 go build -o vinit-linux-arm64 init.go 
-          GOOS=linux GOARCH=arm go build -o vinit-linux-arm init.go 
-          GOOS=darwin GOARCH=amd64 go build -o vinit-macos-amd64 init.go 
-          GOOS=darwin GOARCH=arm64 go build -o vinit-macos-arm64 init.go 
-          GOOS=windows GOARCH=amd64 go build -o vinit-windows-x64.exe init.go 
-          GOOS=windows GOARCH=386 go build -o vinit-windows-x86.exe init.go
-          GOOS=windows GOARCH=arm64 go build -o vinit-windows-arm64.exe init.go
-          GOOS=windows GOARCH=arm go build -o vinit-windows-arm.exe init.go
+          GOOS=linux GOARCH=amd64 go build -o bin/vinit-linux-amd64 init.go 
+          GOOS=linux GOARCH=386 go build -o bin/vinit-linux-386 init.go 
+          GOOS=linux GOARCH=arm64 go build -o bin/vinit-linux-arm64 init.go 
+          GOOS=linux GOARCH=arm go build -o bin/vinit-linux-arm init.go 
+          GOOS=darwin GOARCH=amd64 go build -o bin/vinit-macos-amd64 init.go 
+          GOOS=darwin GOARCH=arm64 go build -o bin/vinit-macos-arm64 init.go 
+          GOOS=windows GOARCH=amd64 go build -o bin/vinit-windows-x64.exe init.go 
+          GOOS=windows GOARCH=386 go build -o bin/vinit-windows-x86.exe init.go
+          GOOS=windows GOARCH=arm64 go build -o bin/vinit-windows-arm64.exe init.go
+          GOOS=windows GOARCH=arm go build -o bin/vinit-windows-arm.exe init.go
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            vinit-linux-amd64
-            vinit-linux-386
-            vinit-linux-arm64
-            vinit-linux-arm
-            vinit-macos-amd64
-            vinit-macos-arm64
-            vinit-windows-x64.exe
-            vinit-windows-x86.exe
-            vinit-windows-arm64.exe
-            vinit-windows-arm.exe
+            bin/*
