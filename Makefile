@@ -1,9 +1,15 @@
 test:
+	@make clean
 	@echo "Verilating..."
-	verilator --cc ledmodule.v
+	@verilator --timing --trace --cc testbench.v
 	@echo "Compiling..."
-	verilator --trace --exe --build --cc ledmodule.v ledmodule.cpp
+	@verilator --timing --trace --exe --build --cc testbench.v testbench.cpp
 	@echo "Building..."
-	./obj_dir/Vledmodule
+	@./obj_dir/Vtestbench
 	@echo "Running..."
-	gtkwave waveform.vcd
+	@gtkwave obj_dir/testbench.vcd
+
+clean:
+	@echo "Cleaning..."
+	@rm -rf obj_dir
+	@verilator --timing --trace --cc testbench.v
