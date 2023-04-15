@@ -24,10 +24,17 @@ func main() {
 	name := flag.String("name", "", "Name of the project")
 	flag.Parse()
 
+	if *name == "" && len(os.Args) > 1 {
+		*name = os.Args[1]
+	}
+
 	if *name == "" {
 		flag.PrintDefaults()
 		return
 	}
+
+	*name = string(bytes.ReplaceAll([]byte(*name), []byte("-"), []byte("_")))
+	*name = string(bytes.ReplaceAll([]byte(*name), []byte(" "), []byte("_")))
 
 	err := ensureProjectDir(*name)
 	if err != nil {

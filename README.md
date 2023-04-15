@@ -14,6 +14,10 @@ This is a simple script to generate a boilerplate for a verilog project using ve
 
 ```bash
 $ vinit -name <project-name>
+$ cd <project-name>
+$ make cmake
+# make changes to <project-name>.v and testbench.v
+$ make
 ```
 
 ### Running the project
